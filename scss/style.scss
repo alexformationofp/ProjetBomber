@@ -1,0 +1,30 @@
+@import 'reset';
+@import 'variables';
+@import 'mixin';
+
+
+.cadre{
+    height: 700px;
+    width: 700px;
+    background: lightgrey;
+    border: solid 2px black;
+    position: relative;
+  }
+  
+  #carre{
+    height: 50px;
+    width: 50px;
+    background: yellow;
+    position: absolute;
+    top: 300px;
+    left: 300px;
+  }
+  
+  #ennemi{
+    height: 50px;
+    width: 50px;
+    background: red;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
