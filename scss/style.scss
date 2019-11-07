@@ -2,6 +2,18 @@
 @import 'variables';
 @import 'mixin';
 
+body{
+  background-image: url(../img/wallpaper.png);
+  border: 2px solid red;
+  height: 100vh;
+}
+section{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px sloid yellow;
+}
 
 .cadre{
     height: 700px;
@@ -14,7 +26,6 @@
   #carre{
     height: 50px;
     width: 50px;
-    background: yellow;
     position: absolute;
     top: 300px;
     left: 300px;
@@ -23,7 +34,6 @@
 .ennemi{
     height: 50px;
     width: 50px;
-    background: red;
     position: absolute;
     top: 50px;
     left: 50px;
@@ -48,7 +58,7 @@
   .bombe{
     height: 50px;
     width: 50px;
-    background: green;
+    background-image: url("../img/bomb.gif");
     position: absolute;
     top: 100px;
     left: 100px;
@@ -58,8 +68,43 @@
   .explosion{
     //   width: 150px;
     //   height: 150px;
-      background-color: pink;
+      background-image: url("../img/explosion.gif");
     //   transform: translate(-50px, -50px);
     // transform: scale(3);
   }
 
+  #got-screen{
+    border: 2px solid red;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.got{
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 100px;
+  color: red;
+  font-family: 'Fredoka One';
+}
+
+
+// #vie-screen{
+//   border: 2px solid red;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+.vie{
+z-index: 1000;
+display: flex;
+justify-content: flex-end;
+align-content: flex-start;
+font-size: 50px;
+color:black;
+font-family: 'Fredoka One';
+}
