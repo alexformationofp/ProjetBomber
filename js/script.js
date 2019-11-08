@@ -105,7 +105,7 @@ setInterval(function () {
             case 0:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("top")) === 0) {
                     move(ennemi[i], "bas");
-                    // ennemi.src = "img/mechant_bas.gif"
+                    
                 } else {
                     move(ennemi[i], "haut");
                     ennemi.src = "img/mechant_haut.gif"
