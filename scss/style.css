@@ -1,0 +1,183 @@
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXX   RESET    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX   */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+body {
+  background-image: url(../img/wallpaper.png); }
+
+section {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1200px;
+  align-items: flex-start;
+  margin: 0 auto;
+  padding: 20px 0; }
+
+#aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+#compteurVies {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 17px 13px 15px 4px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 70px; }
+  #compteurVies .avatar {
+    position: relative;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    background-image: url("../img/avatar.bomber.png");
+    background-size: cover; }
+    #compteurVies .avatar .ombre {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url("../img/ombreBomber.png");
+      background-size: cover;
+      opacity: 0;
+      transition: opacity .3s ease-out;
+      width: 100%;
+      height: 100%; }
+
+.cadre {
+  height: 700px;
+  width: 700px;
+  background: rgba(255, 255, 255, 0.7);
+  position: relative;
+  transition: background-color .1s ease-in-out;
+  box-shadow: 17px 13px 15px 4px rgba(0, 0, 0, 0.8); }
+
+#carre {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 300px;
+  left: 300px; }
+
+.ennemi {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 50px;
+  left: 50px; }
+
+.ennemi:nth-of-type(2) {
+  top: auto;
+  bottom: 50px;
+  left: 50px; }
+
+.ennemi:nth-of-type(3) {
+  left: auto;
+  bottom: 50px;
+  right: 50px; }
+
+.ennemi:nth-of-type(4) {
+  top: auto;
+  bottom: 50px;
+  left: auto;
+  right: 50px; }
+
+.bombe {
+  height: 50px;
+  width: 50px;
+  background-image: url("../img/bomb.gif");
+  position: absolute;
+  border-radius: 100%;
+  transition: width,height .1s ease-in-out;
+  font-family: 'Fredoka One'; }
+
+.explosion {
+  background-image: url("../img/explosion.gif"); }
+
+#got-screen {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.got {
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 100px;
+  color: red;
+  font-family: 'Fredoka One'; }
+
+#flash {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #eaff03;
+  opacity: 0;
+  transition: opacity .1s ease-out; }
+
+.vie {
+  display: none; }
+
+#replay {
+  width: 150px;
+  margin-top: 50px;
+  transform: scale(0);
+  transition: transform .6s ease-in-out; }
+  #replay a img {
+    width: 100%; }
+  #replay a p {
+    font-family: 'Fredoka One';
+    font-size: 30px;
+    text-align: center;
+    color: white; }
+
+/*# sourceMappingURL=style.css.map */

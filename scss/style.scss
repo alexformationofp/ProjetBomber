@@ -1,0 +1,184 @@
+@import 'reset';
+@import 'variables';
+@import 'mixin';
+
+body{
+  background-image: url(../img/wallpaper.png);
+  // border: 2px solid red;
+  // height: 100vh;
+  // transition: background-position 80s;
+}
+section{
+  // height: 90%;
+  display: flex;
+  justify-content: space-around;
+  max-width: 1200px;
+  align-items: flex-start;
+  // border: 2px sloid yellow;
+  // width: 90%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+#aside{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#compteurVies{
+  background: rgba(255, 255, 255, .7);
+  box-shadow: 17px 13px 15px 4px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 70px;
+    .avatar{
+      position: relative;  
+      margin: 10px;
+      width: 50px;
+      height: 50px;
+      background-image: url('../img/avatar.bomber.png');
+      background-size: cover;
+      .ombre{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        background-image: url('../img/ombreBomber.png'); 
+        background-size: cover;
+        opacity: 0;
+        transition: opacity .3s ease-out;
+        width: 100%;
+        height: 100%;   
+      }
+    }
+}
+
+.cadre{
+    height: 700px;
+    width: 700px;
+    background: rgba(255, 255, 255, .7);
+    // border: solid 2px black;
+    position: relative;
+    transition : background-color .1s ease-in-out;
+    box-shadow: 17px 13px 15px 4px rgba(0,0,0,0.8);
+  }
+  
+  #carre{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 300px;
+    left: 300px;
+  }
+  
+.ennemi{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
+.ennemi:nth-of-type(2){
+    top: auto;
+    bottom: 50px;
+    left: 50px;
+}
+.ennemi:nth-of-type(3){
+    left: auto;
+    bottom: 50px;
+    right: 50px;
+}
+.ennemi:nth-of-type(4){
+    top: auto;
+    bottom: 50px;
+    left: auto;
+    right: 50px;
+}
+
+  .bombe{
+    height: 50px;
+    width: 50px;
+    background-image: url("../img/bomb.gif");
+    position: absolute;
+    // top: 100px;
+    // left: 100px;
+    border-radius: 100%;
+    transition: width,height .1s ease-in-out;
+    font-family: 'Fredoka One';
+  }
+  .explosion{
+    //   width: 150px;
+    //   height: 150px;
+      background-image: url("../img/explosion.gif");
+    //   transform: translate(-50px, -50px);
+    // transform: scale(3);
+  }
+
+  #got-screen{
+    // border: 2px solid red;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.got{
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 100px;
+  color: red;
+  font-family: 'Fredoka One';
+}
+
+#flash{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #eaff03;
+  opacity: 0;
+  transition: opacity .1s ease-out;
+}
+
+// #vie-screen{
+//   border: 2px solid red;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .vie{
+// z-index: 1000;
+// display: flex;
+// justify-content: flex-end;
+// align-content: flex-start;
+// font-size: 50px;
+// color:black;
+// font-family: 'Fredoka One';
+// }
+
+.vie{
+  display: none;
+}
+#replay{
+  width: 150px;
+  margin-top: 50px;
+  transform: scale(0);
+  transition: transform .6s ease-in-out;
+  a{
+    img{
+    width: 100%;
+    }
+    p{
+      font-family: 'Fredoka One';
+      font-size: 30px;
+      text-align: center;
+      color: white;
+    }
+  }
+}
+
