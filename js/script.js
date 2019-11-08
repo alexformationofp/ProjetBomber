@@ -156,14 +156,14 @@ function creerBombe() {
     bombe.style.left = window.getComputedStyle(carre).getPropertyValue("left");
     window.setTimeout(function () {
         bombe.classList.add("explosion");
-        bombe.innerText = "BOOM!!";
+        // bombe.innerText = "BOOM!!";
     }, 3000);
     window.setTimeout(function () {
         bombe.classList.remove("explosion");
-    }, 6000);
+    }, 5000);
     window.setTimeout(function () {
         cadre.removeChild(bombe);
-    }, 6000);
+    }, 5000);
     }
     
 }
