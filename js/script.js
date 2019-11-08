@@ -9,6 +9,7 @@ let carre = document.getElementById("carre");
 let ennemi = document.getElementsByClassName("ennemi");
 let gaucheCarre = window.getComputedStyle(carre).getPropertyValue("left");
 let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
+let obstacle = document.querySelectorAll(".obstacle");
 
 // fonction qui permet de bouger un élément dans une direction
 function move(element, direction) {
@@ -16,37 +17,104 @@ function move(element, direction) {
     let left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
 
     switch (direction) {
+
         case "bas":
             top_element = parseInt(window.getComputedStyle(element).getPropertyValue("top"));
-            if (top_element < 650) {
-                top_element += 50;
-                element.style.top = top_element + "px";
+            collision = false;
+            for (let i = 0; i < obstacle.length; i++) {
+                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top")) - 50;
+                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left"));
+                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
+                    collision = true;
+                    break;
+                } else {
+                    collision = false;
+                }
+            };
+            if (collision == false) {
+                if (top_element < 650) {
+                    top_element += 50;
+                    element.style.top = top_element + "px";
+                }
             }
             break;
+
         case "haut":
             top_element = parseInt(window.getComputedStyle(element).getPropertyValue("top"));
-            if (top_element > 0) {
-                top_element -= 50;
-                element.style.top = top_element + "px";
+            collision = false
+            for (let i = 0; i < obstacle.length; i++) {
+                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top")) + 50;
+                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left"));
+                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
+
+                    collision = true;
+                    break;
+                } else {
+                    collision = false;
+                }
+            };
+            if (collision == false) {
+                if (top_element > 0) {
+                    top_element -= 50;
+                    element.style.top = top_element + "px";
+                }
             }
             break;
+
+
         case "droite":
             left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
-            if (left_element < 650) {
-                left_element += 50;
-                element.style.left = left_element + "px";
+            collision = false
+            for (let i = 0; i < obstacle.length; i++) {
+                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top"));
+                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left")) - 50;
+                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
+
+                    collision = true;
+                    break;
+                } else {
+                    collision = false;
+                }
+            };
+            if (collision == false) {
+                if (left_element < 650) {
+                    left_element += 50;
+                    element.style.left = left_element + "px";
+                }
             }
             break;
+
+
+
+
+
+
+
+
         case "gauche":
             left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
-            if (left_element > 0) {
-                left_element -= 50;
-                element.style.left = left_element + "px";
+            collision = false
+            for (let i = 0; i < obstacle.length; i++) {
+                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top"));
+                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left")) + 50;
+                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
+
+                    collision = true;
+                    break;
+                } else {
+                    collision = false;
+                }
+            };
+            if (collision == false) {
+                if (left_element > 0) {
+                    left_element -= 50;
+                    element.style.left = left_element + "px";
+                }
+                break;
+
             }
-            break;
     }
 }
-
 
 
 
@@ -78,7 +146,7 @@ window.addEventListener("keydown", function (event) {
         let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
         let gaucheEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("left");
         let hautEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("top");
-        
+
         // ICI -> on a essayé de faire perdre des vies et faire marcher le compteur aussi, quand on touche un ennemi, on a donc essayé d'appliquer la même chose qu'avec les bombes mais ca marche pas.
         if (gaucheCarre == gaucheEnnemi && hautCarre == hautEnnemi) {
             window.setTimeout(function () {
@@ -86,11 +154,12 @@ window.addEventListener("keydown", function (event) {
                 document.querySelector('#flash').style.opacity = '0';
             }, 100);
             document.querySelector('#flash').style.opacity = '0.8';
-            
+
             carre.src = "img/bomber_touch.gif"
         }
     }
 });
+
 
 setInterval(function () {
     ennemi = document.querySelectorAll(".ennemi");
@@ -100,10 +169,10 @@ setInterval(function () {
             case 0:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("top")) === 0) {
                     move(ennemi[i], "bas");
-                    
+
                 } else {
                     move(ennemi[i], "haut");
-                    ennemi.src = "img/mechant_haut.gif"
+                    // ennemi.src = "img/mechant_haut.gif"
                 }
                 break;
             case 1:
@@ -148,24 +217,24 @@ setInterval(function () {
 let cadre = document.querySelector(".cadre");
 
 function creerBombe() {
-    if (life > 0){
+    if (life > 0) {
         let bombe = document.createElement("div");
-    bombe.classList.add("bombe");
-    cadre.appendChild(bombe);
-    bombe.style.top = window.getComputedStyle(carre).getPropertyValue("top");
-    bombe.style.left = window.getComputedStyle(carre).getPropertyValue("left");
-    window.setTimeout(function () {
-        bombe.classList.add("explosion");
-        // bombe.innerText = "BOOM!!";
-    }, 3000);
-    window.setTimeout(function () {
-        bombe.classList.remove("explosion");
-    }, 5000);
-    window.setTimeout(function () {
-        cadre.removeChild(bombe);
-    }, 5000);
+        bombe.classList.add("bombe");
+        cadre.appendChild(bombe);
+        bombe.style.top = window.getComputedStyle(carre).getPropertyValue("top");
+        bombe.style.left = window.getComputedStyle(carre).getPropertyValue("left");
+        window.setTimeout(function () {
+            bombe.classList.add("explosion");
+            // bombe.innerText = "BOOM!!";
+        }, 3000);
+        window.setTimeout(function () {
+            bombe.classList.remove("explosion");
+        }, 5000);
+        window.setTimeout(function () {
+            cadre.removeChild(bombe);
+        }, 5000);
     }
-    
+
 }
 
 window.addEventListener("keydown", function (e) {
@@ -194,7 +263,7 @@ window.setInterval(function () {
         for (let j = 0; j < bombes.length; j++) {
             if (bombes[j].classList.contains("explosion") && collision(bombes[j], ennemi[i])) {
                 cadre.removeChild(ennemi[i]);
-               
+
             }
         }
     }
@@ -218,14 +287,13 @@ let kill_interval = window.setInterval(function () {
             document.querySelector(".got").append("GAME OVER");
             document.querySelector('#flash').style.backgroundColor = 'black';
             document.querySelector('#flash').style.transitionDuration = '1s';
-            document.querySelector('#flash').style.opacity = '0.8';  
+            document.querySelector('#flash').style.opacity = '0.8';
         }, 1500);
-        window.setTimeout(function (){
+        window.setTimeout(function () {
             document.querySelector('#replay').style.transform = 'scale(1)'
-        },1500) 
+        }, 1500)
 
-    }
-    else {
+    } else {
         for (let j = 0; j < bombes.length; j++) {
             if (bombes[j].classList.contains("explosion") && collision(bombes[j], carre)) {
                 window.setTimeout(function () {
@@ -240,7 +308,7 @@ let kill_interval = window.setInterval(function () {
     }
 }, 125);
 
-let decompteVies = window.setInterval(function() {
+let decompteVies = window.setInterval(function () {
     switch (life) {
         case 4:
             document.getElementById('ombre4').style.opacity = ".9"
@@ -256,16 +324,49 @@ let decompteVies = window.setInterval(function() {
             break;
         case 0:
             document.getElementById('ombre0').style.opacity = ".9"
-            break;     
-    }    
+            break;
+    }
 })
-let leftBody =0
-let scrollBackground = window.setInterval(function(){
-    
-    document.querySelector('body').style.backgroundPositionX = (leftBody+'px')
-    leftBody++
-},80)
+let leftBody = 0
+let scrollBackground = window.setInterval(function () {
 
-document.querySelector('#replay').addEventListener('hover', function(){
+    document.querySelector('body').style.backgroundPositionX = (leftBody + 'px')
+    leftBody++
+}, 80)
+
+document.querySelector('#replay').addEventListener('hover', function () {
     document.querySelector('#flash').style.backgroundColor = 'white';
 })
+
+
+
+
+/*************** code pour son ************************/
+
+let Sound = function(src) {
+    let sound = document.createElement("audio");
+    sound.src = src;
+    sound.setAttribute("preload", "auto");
+    sound.setAttribute("controls", "none");
+    sound.style.display = "none";
+    document.body.appendChild(sound);
+    this.play = function() {
+    sound.pause();
+    sound.currentTime = 0;
+    sound.play();
+    console.log(src + " is playing");
+    };
+    this.stop = function() {
+    sound.stop();
+    };
+    };
+    let aList = ['../ProjetBomber/son/',"../ProjetBomber/son/"];
+    let onChangeSound = new Sound(aList[Math.floor(Math.random() * 1)]);
+    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("keydown", function() {
+    onChangeSound.play();
+    });
+    document.getElementById("btn").addEventListener("click", function() {
+    onChangeSound.play();
+    });
+    });
