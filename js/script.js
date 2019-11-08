@@ -82,15 +82,10 @@ window.addEventListener("keydown", function (event) {
         // ICI -> on a essayé de faire perdre des vies et faire marcher le compteur aussi, quand on touche un ennemi, on a donc essayé d'appliquer la même chose qu'avec les bombes mais ca marche pas.
         if (gaucheCarre == gaucheEnnemi && hautCarre == hautEnnemi) {
             window.setTimeout(function () {
-                cadre.style.backgroundColor = "lightgrey";
-            }, 
-            200);
-            cadre.style.backgroundColor = "black"
-            // let life = 5;
-            //     let vie2 = document.querySelector(".vie")
-            // life -= 1;
-            // vie2.innerHTML = life
-            // console.log(life);
+                life--;
+                document.querySelector('#flash').style.opacity = '0';
+            }, 100);
+            document.querySelector('#flash').style.opacity = '0.8';
             
             carre.src = "img/bomber_touch.gif"
         }
@@ -140,9 +135,10 @@ setInterval(function () {
         let hautEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("top");
         if (gaucheCarre == gaucheEnnemi && hautCarre == hautEnnemi) {
             window.setTimeout(function () {
-                cadre.style.backgroundColor = "lightgrey";
-            }, 200);
-            cadre.style.backgroundColor = "black";
+                life--;
+                document.querySelector('#flash').style.opacity = '0';
+            }, 100);
+            document.querySelector('#flash').style.opacity = '0.8';
         }
     }
 }, 300);
@@ -152,7 +148,8 @@ setInterval(function () {
 let cadre = document.querySelector(".cadre");
 
 function creerBombe() {
-    let bombe = document.createElement("div");
+    if (life > 0){
+        let bombe = document.createElement("div");
     bombe.classList.add("bombe");
     cadre.appendChild(bombe);
     bombe.style.top = window.getComputedStyle(carre).getPropertyValue("top");
@@ -167,6 +164,8 @@ function creerBombe() {
     window.setTimeout(function () {
         cadre.removeChild(bombe);
     }, 6000);
+    }
+    
 }
 
 window.addEventListener("keydown", function (e) {
@@ -195,10 +194,7 @@ window.setInterval(function () {
         for (let j = 0; j < bombes.length; j++) {
             if (bombes[j].classList.contains("explosion") && collision(bombes[j], ennemi[i])) {
                 cadre.removeChild(ennemi[i]);
-                // window.setTimeout(function(){
-                //     cadre.style.backgroundColor = ('lightgrey')
-                // }, 200);
-                // cadre.style.backgroundColor = 'chartreuse'
+               
             }
         }
     }
@@ -220,7 +216,14 @@ let kill_interval = window.setInterval(function () {
         window.setTimeout(function () {
             cadre.removeChild(carre);
             document.querySelector(".got").append("GAME OVER");
+            document.querySelector('#flash').style.backgroundColor = 'black';
+            document.querySelector('#flash').style.transitionDuration = '1s';
+            document.querySelector('#flash').style.opacity = '0.8';  
         }, 1500);
+        window.setTimeout(function (){
+            document.querySelector('#replay').style.transform = 'scale(1)'
+        },1500) 
+
     }
     else {
         for (let j = 0; j < bombes.length; j++) {
@@ -228,11 +231,41 @@ let kill_interval = window.setInterval(function () {
                 window.setTimeout(function () {
                     vie.innerHTML = life
                     life--;
-                    cadre.style.backgroundColor = "lightgrey";
-                }, 200);
-                cadre.style.backgroundColor = "chartreuse";
+                    document.querySelector('#flash').style.opacity = '0';
+                }, 100);
+                document.querySelector('#flash').style.opacity = '0.8';
                 carre.src = "img/bomber_touch.gif"
             };
         }
     }
 }, 125);
+
+let decompteVies = window.setInterval(function() {
+    switch (life) {
+        case 4:
+            document.getElementById('ombre4').style.opacity = ".9"
+            break;
+        case 3:
+            document.getElementById('ombre3').style.opacity = ".9"
+            break;
+        case 2:
+            document.getElementById('ombre2').style.opacity = ".9"
+            break;
+        case 1:
+            document.getElementById('ombre1').style.opacity = ".9"
+            break;
+        case 0:
+            document.getElementById('ombre0').style.opacity = ".9"
+            break;     
+    }    
+})
+let leftBody =0
+let scrollBackground = window.setInterval(function(){
+    
+    document.querySelector('body').style.backgroundPositionX = (leftBody+'px')
+    leftBody++
+},80)
+
+document.querySelector('#replay').addEventListener('hover', function(){
+    document.querySelector('#flash').style.backgroundColor = 'white';
+})
