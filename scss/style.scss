@@ -3,7 +3,7 @@
 @import 'mixin';
 
 body{
-  background-image: url(../img/wallpaper.png);
+  background-image: url(../img/wallpaper4.png);
   // border: 2px solid red;
   // height: 100vh;
   // transition: background-position 80s;
@@ -107,15 +107,18 @@ section{
     width: 50px;
     background-image: url("../img/bomb.gif");
     position: absolute;
+    // top: 100px;
+    // left: 100px;
+    border-radius: 100%;
     transition: width,height .1s ease-in-out;
     font-family: 'Fredoka One';
   }
   .explosion{
-      width: 150px;
-      height: 150px;
+    //   width: 150px;
+    //   height: 150px;
       background-image: url("../img/explosion.gif");
     //   transform: translate(-50px, -50px);
-      transform: scale(3);
+     transform: scale(3);
   }
 
   #got-screen{
@@ -165,7 +168,6 @@ section{
 
 .vie{
   display: none;
-
 }
 #replay{
   width: 150px;
@@ -226,3 +228,17 @@ section{
   left: auto;
   right: 350px;
 }
+/*
+#btn{
+  cursor:pointer;
+  border-radius:10px;
+  background-color: deeppink;
+  display:inline-block;
+  padding:8px;
+  margin-left: 840px;
+  margin-right: 840px;
+  margin-top: 20px;
+  border:1px solid #000;
+  box-shadow : 0px 3px 3px 0px #D1D1D1;
+  }
+  */

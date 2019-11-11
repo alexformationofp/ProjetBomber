@@ -1,194 +1,155 @@
 console.log("hello");
 
-/********** CHOISIR UN NB ALÉATOIRE *************/
-
+//chosit un nombre aléatoire
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
-
-/********* VARIABLES GLOBALES ***********/
-
 
 let carre = document.getElementById("carre");
 let ennemi = document.getElementsByClassName("ennemi");
 let gaucheCarre = window.getComputedStyle(carre).getPropertyValue("left");
 let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
+
 let obstacle = document.querySelectorAll(".obstacle");
+ 
+ 
 
-/************* FONCTION QUI PERMET DE BOUGER UN ÉLÉMENT DANS UNE DIRECTION *************/
-/************* + DANS LE SWITCH : PERMET DE NE PAS TRAVERSER LES OBSTACLES *************/
-
+// fonction qui permet de bouger un élément dans une direction
 function move(element, direction) {
     let top_element = parseInt(window.getComputedStyle(element).getPropertyValue("top"));
     let left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
 
     switch (direction) {
-
         case "bas":
             top_element = parseInt(window.getComputedStyle(element).getPropertyValue("top"));
-            collision = false;
-            for (let i = 0; i < obstacle.length; i++) {
-                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top")) - 50;
-                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left"));
-                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
-                    collision = true;
-                    break;
-                } else {
-                    collision = false;
-                }
-            };
-            if (collision == false) {
-                if (top_element < 650) {
-                    top_element += 50;
-                    element.style.top = top_element + "px";
-                }
-            }
-            break;
 
+            tobs = parseInt(window.getComputedStyle(obstacle[0]).getPropertyValue("top"));
+            lobs = parseInt(window.getComputedStyle(obstacle[0]).getPropertyValue("left"));
+
+
+            if (  parseInt(top_element) == parseInt(getComputedStyle(obstacle[0]).getPropertyValue("top")) - 50 &&
+                    parseInt(left_element) == parseInt(getComputedStyle(obstacle[0]).getPropertyValue("left")) ){
+              
+                
+            }else{
+      if (top_element < 650) {
+                top_element += 50;
+                element.style.top = top_element + "px";
+            }
+            }
+
+         
+            break;
         case "haut":
             top_element = parseInt(window.getComputedStyle(element).getPropertyValue("top"));
-            collision = false
-            for (let i = 0; i < obstacle.length; i++) {
-                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top")) + 50;
-                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left"));
-                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
+           
+            // tobs = parseInt(window.getComputedStyle(obstacle[0]).getPropertyValue("top"));
+            // lobs = parseInt(window.getComputedStyle(obstacle[0]).getPropertyValue("left"));
 
-                    collision = true;
-                    break;
-                } else {
-                    collision = false;
-                }
-            };
-            if (collision == false) {
-                if (top_element > 0) {
-                    top_element -= 50;
-                    element.style.top = top_element + "px";
-                }
+
+            if (    parseInt(top_element) == parseInt(getComputedStyle(obstacle[0]).getPropertyValue("top")) + 50 &&
+                    parseInt(left_element) == parseInt(getComputedStyle(obstacle[0]).getPropertyValue("left")) ||
+                    parseInt(top_element) == parseInt(getComputedStyle(obstacle[1]).getPropertyValue("top")) + 50 &&
+                    parseInt(left_element) == parseInt(getComputedStyle(obstacle[1]).getPropertyValue("left")) ||
+                    parseInt(top_element) == parseInt(getComputedStyle(obstacle[2]).getPropertyValue("top")) + 50 &&
+                    parseInt(left_element) == parseInt(getComputedStyle(obstacle[2]).getPropertyValue("left")) ||
+                    parseInt(top_element) == parseInt(getComputedStyle(obstacle[3]).getPropertyValue("top")) + 50 &&
+                    parseInt(left_element) == parseInt(getComputedStyle(obstacle[3]).getPropertyValue("left")))
+              
+                
+            }else{
+              if (top_element > 0) {
+                top_element -= 50;
+                element.style.top = top_element + "px";
+            }  
             }
+           
+            
             break;
-
         case "droite":
             left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
-            collision = false
-            for (let i = 0; i < obstacle.length; i++) {
-                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top"));
-                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left")) - 50;
-                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
-
-                    collision = true;
-                    break;
-                } else {
-                    collision = false;
-                }
-            };
-            if (collision == false) {
-                if (left_element < 650) {
-                    left_element += 50;
-                    element.style.left = left_element + "px";
-                }
+            if (left_element < 650) {
+                left_element += 50;
+                element.style.left = left_element + "px";
             }
             break;
-
         case "gauche":
             left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
-            collision = false
-            for (let i = 0; i < obstacle.length; i++) {
-                let tobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("top"));
-                let lobs_ = parseInt(window.getComputedStyle(obstacle[i]).getPropertyValue("left")) + 50;
-                if (parseInt(top_element) == tobs_ && parseInt(left_element) == lobs_) {
-
-                    collision = true;
-                    break;
-                } else {
-                    collision = false;
-                }
-            };
-            if (collision == false) {
-                if (left_element > 0) {
-                    left_element -= 50;
-                    element.style.left = left_element + "px";
-                }
-                break;
-
+            if (left_element > 0) {
+                left_element -= 50;
+                element.style.left = left_element + "px";
             }
+            break;
     }
 }
 
 
 
-/*********** EVENT LISTENER : PERMET DE MOUVOIR LE HÉROS EN FONCTION DES TOUCHES ***********/
 
+// event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
 window.addEventListener("keydown", function (event) {
     switch (event.keyCode) {
-        case 38: // ALLER EN HAUT.
+        case 38: //code quand on va en haut
             move(carre, "haut");
             carre.src = "img/bomber_haut.gif"
             break;
-            
-        case 39: //ALLER À DROITE.
+            //droite
+        case 39:
             move(carre, "droite");
             carre.src = "img/bomber_droite.gif"
             break;
-            
-        case 40: //ALLER EN BAS.
+            //bas
+        case 40:
             move(carre, "bas");
             carre.src = "img/bomber_bas.gif"
             break;
-            
-        case 37: //ALLER À GAUCHE.
+            //gauche
+        case 37:
             move(carre, "gauche");
             carre.src = "img/bomber_gauche.gif"
             break;
     }
-
-/*********** QUAND L'ENNEMI TOUCHE NOTRE HÉROS : VIE -1 **************/
-    
     for (let i = 0; i < ennemi.length; i++) {
         let gaucheCarre = window.getComputedStyle(carre).getPropertyValue("left");
         let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
         let gaucheEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("left");
         let hautEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("top");
-
-       
+        
+        // ICI -> on a essayé de faire perdre des vies et faire marcher le compteur aussi, quand on touche un ennemi, on a donc essayé d'appliquer la même chose qu'avec les bombes mais ca marche pas.
         if (gaucheCarre == gaucheEnnemi && hautCarre == hautEnnemi) {
             window.setTimeout(function () {
                 life--;
                 document.querySelector('#flash').style.opacity = '0';
             }, 100);
             document.querySelector('#flash').style.opacity = '0.8';
+            
             carre.src = "img/bomber_touch.gif"
         }
     }
 });
-
-/********* FAIRE BOUGER L'ENNEMI ALÉATOIREMENT EN FONCTION DU getRandom ***********/
 
 setInterval(function () {
     ennemi = document.querySelectorAll(".ennemi");
     for (let i = 0; i < ennemi.length; i++) {
         let random = getRandomInt(4);
         switch (random) {
-
-
             case 0:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("top")) === 0) {
                     move(ennemi[i], "bas");
-
+                    
                 } else {
                     move(ennemi[i], "haut");
+                    ennemi.src = "img/mechant_haut.gif"
                 }
                 break;
-
-
             case 1:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("top")) === 650) {
                     move(ennemi[i], "haut");
+                    // ennemi.src = "img/mechant_haut.gif"
                 } else {
                     move(ennemi[i], "bas");
                 }
                 break;
-
-
             case 2:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("left")) === 0) {
                     move(ennemi[i], "droite");
@@ -196,8 +157,6 @@ setInterval(function () {
                     move(ennemi[i], "gauche");
                 }
                 break;
-
-
             case 3:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("left")) === 650) {
                     move(ennemi[i], "gauche");
@@ -206,13 +165,10 @@ setInterval(function () {
                 }
                 break;
         }
-
-
         let gaucheCarre = window.getComputedStyle(carre).getPropertyValue("left");
         let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
         let gaucheEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("left");
         let hautEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("top");
-
         if (gaucheCarre == gaucheEnnemi && hautCarre == hautEnnemi) {
             window.setTimeout(function () {
                 life--;
@@ -223,29 +179,29 @@ setInterval(function () {
     }
 }, 300);
 
-/********* CRÉER UNE BOMBE ***********/
+// faire bouger l'ennemi dans une direction aléatoirement
 
 let cadre = document.querySelector(".cadre");
 
 function creerBombe() {
-    if (life > 0) {
+    if (life > 0){
         let bombe = document.createElement("div");
-        bombe.classList.add("bombe");
-        cadre.appendChild(bombe);
-        bombe.style.top = window.getComputedStyle(carre).getPropertyValue("top");
-        bombe.style.left = window.getComputedStyle(carre).getPropertyValue("left");
-        window.setTimeout(function () {
-            bombe.classList.add("explosion");
-            
-        }, 3000);
-        window.setTimeout(function () {
-            bombe.classList.remove("explosion");
-        }, 5000);
-        window.setTimeout(function () {
-            cadre.removeChild(bombe);
-        }, 5000);
+    bombe.classList.add("bombe");
+    cadre.appendChild(bombe);
+    bombe.style.top = window.getComputedStyle(carre).getPropertyValue("top");
+    bombe.style.left = window.getComputedStyle(carre).getPropertyValue("left");
+    window.setTimeout(function () {
+        bombe.classList.add("explosion");
+        // bombe.innerText = "BOOM!!";
+    }, 3000);
+    window.setTimeout(function () {
+        bombe.classList.remove("explosion");
+    }, 5000);
+    window.setTimeout(function () {
+        cadre.removeChild(bombe);
+    }, 5000);
     }
-
+    
 }
 
 window.addEventListener("keydown", function (e) {
@@ -255,7 +211,7 @@ window.addEventListener("keydown", function (e) {
     }
 });
 
-/*********** LES COLLISIONS DES BOMBES ************/
+
 
 function collision(bombe, perso) {
     let gaucheBombe = parseInt(window.getComputedStyle(bombe).getPropertyValue("left"));
@@ -274,19 +230,18 @@ window.setInterval(function () {
         for (let j = 0; j < bombes.length; j++) {
             if (bombes[j].classList.contains("explosion") && collision(bombes[j], ennemi[i])) {
                 cadre.removeChild(ennemi[i]);
-
+               
             }
         }
     }
 }, 100);
 
-
-/************ PERTE DE VIES & MORT ************/
-
 let life = 5;
 let vie = document.querySelector(".vie")
+
+
 let kill_interval = window.setInterval(function () {
-let bombes = document.querySelectorAll(".bombe");
+    let bombes = document.querySelectorAll(".bombe");
 
     if (life <= 0) {
         clearInterval(kill_interval);
@@ -299,13 +254,14 @@ let bombes = document.querySelectorAll(".bombe");
             document.querySelector(".got").append("GAME OVER");
             document.querySelector('#flash').style.backgroundColor = 'black';
             document.querySelector('#flash').style.transitionDuration = '1s';
-            document.querySelector('#flash').style.opacity = '0.8';
+            document.querySelector('#flash').style.opacity = '0.8';  
         }, 1500);
-        window.setTimeout(function () {
+        window.setTimeout(function (){
             document.querySelector('#replay').style.transform = 'scale(1)'
-        }, 1500)
+        },1500) 
 
-    } else {
+    }
+    else {
         for (let j = 0; j < bombes.length; j++) {
             if (bombes[j].classList.contains("explosion") && collision(bombes[j], carre)) {
                 window.setTimeout(function () {
@@ -320,9 +276,7 @@ let bombes = document.querySelectorAll(".bombe");
     }
 }, 125);
 
-/************** COMPTEUR DE VIE ********************/
-
-let decompteVies = window.setInterval(function () {
+let decompteVies = window.setInterval(function() {
     switch (life) {
         case 4:
             document.getElementById('ombre4').style.opacity = ".9"
@@ -338,26 +292,24 @@ let decompteVies = window.setInterval(function () {
             break;
         case 0:
             document.getElementById('ombre0').style.opacity = ".9"
-            break;
-    }
+            break;     
+    }    
 })
-
-/***************** POSITION WALLPAPER *****************/
-
-
-
-let leftBody = 0
-let scrollBackground = window.setInterval(function () {
-
-    document.querySelector('body').style.backgroundPositionX = (leftBody + 'px')
+let leftBody =0
+let scrollBackground = window.setInterval(function(){
+    
+    document.querySelector('body').style.backgroundPositionX = (leftBody+'px')
     leftBody++
-}, 80)
+},80)
 
-document.querySelector('#replay').addEventListener('hover', function () {
+document.querySelector('#replay').addEventListener('hover', function(){
     document.querySelector('#flash').style.backgroundColor = 'white';
 })
 
 
+// let obs = document.querySelectorAll(".obstacle");
+
+// /*************** code pour obstacle ******************************/
 
 
-/*************** code pour son ************************/
+// function 
