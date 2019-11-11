@@ -1,9 +1,13 @@
 console.log("hello");
 
-//chosit un nombre aléatoire
+/********** CHOISIR UN NB ALÉATOIRE *************/
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
+
+/********* VARIABLES GLOBALES ***********/
+
 
 let carre = document.getElementById("carre");
 let ennemi = document.getElementsByClassName("ennemi");
@@ -11,7 +15,9 @@ let gaucheCarre = window.getComputedStyle(carre).getPropertyValue("left");
 let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
 let obstacle = document.querySelectorAll(".obstacle");
 
-// fonction qui permet de bouger un élément dans une direction
+/************* FONCTION QUI PERMET DE BOUGER UN ÉLÉMENT DANS UNE DIRECTION *************/
+/************* + DANS LE SWITCH : PERMET DE NE PAS TRAVERSER LES OBSTACLES *************/
+
 function move(element, direction) {
     let top_element = parseInt(window.getComputedStyle(element).getPropertyValue("top"));
     let left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
@@ -61,7 +67,6 @@ function move(element, direction) {
             }
             break;
 
-
         case "droite":
             left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
             collision = false
@@ -83,13 +88,6 @@ function move(element, direction) {
                 }
             }
             break;
-
-
-
-
-
-
-
 
         case "gauche":
             left_element = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
@@ -118,71 +116,79 @@ function move(element, direction) {
 
 
 
-// event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
+/*********** EVENT LISTENER : PERMET DE MOUVOIR LE HÉROS EN FONCTION DES TOUCHES ***********/
+
 window.addEventListener("keydown", function (event) {
     switch (event.keyCode) {
-        case 38: //code quand on va en haut
+        case 38: // ALLER EN HAUT.
             move(carre, "haut");
             carre.src = "img/bomber_haut.gif"
             break;
-            //droite
-        case 39:
+            
+        case 39: //ALLER À DROITE.
             move(carre, "droite");
             carre.src = "img/bomber_droite.gif"
             break;
-            //bas
-        case 40:
+            
+        case 40: //ALLER EN BAS.
             move(carre, "bas");
             carre.src = "img/bomber_bas.gif"
             break;
-            //gauche
-        case 37:
+            
+        case 37: //ALLER À GAUCHE.
             move(carre, "gauche");
             carre.src = "img/bomber_gauche.gif"
             break;
     }
+
+/*********** QUAND L'ENNEMI TOUCHE NOTRE HÉROS : VIE -1 **************/
+    
     for (let i = 0; i < ennemi.length; i++) {
         let gaucheCarre = window.getComputedStyle(carre).getPropertyValue("left");
         let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
         let gaucheEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("left");
         let hautEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("top");
 
-        // ICI -> on a essayé de faire perdre des vies et faire marcher le compteur aussi, quand on touche un ennemi, on a donc essayé d'appliquer la même chose qu'avec les bombes mais ca marche pas.
+       
         if (gaucheCarre == gaucheEnnemi && hautCarre == hautEnnemi) {
             window.setTimeout(function () {
                 life--;
                 document.querySelector('#flash').style.opacity = '0';
             }, 100);
             document.querySelector('#flash').style.opacity = '0.8';
-
             carre.src = "img/bomber_touch.gif"
         }
     }
 });
 
+/********* FAIRE BOUGER L'ENNEMI ALÉATOIREMENT EN FONCTION DU getRandom ***********/
 
 setInterval(function () {
     ennemi = document.querySelectorAll(".ennemi");
     for (let i = 0; i < ennemi.length; i++) {
         let random = getRandomInt(4);
         switch (random) {
+
+
             case 0:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("top")) === 0) {
                     move(ennemi[i], "bas");
 
                 } else {
                     move(ennemi[i], "haut");
-                    // ennemi.src = "img/mechant_haut.gif"
                 }
                 break;
+
+
             case 1:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("top")) === 650) {
                     move(ennemi[i], "haut");
-                    // ennemi.src = "img/mechant_haut.gif"
                 } else {
                     move(ennemi[i], "bas");
                 }
                 break;
+
+
             case 2:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("left")) === 0) {
                     move(ennemi[i], "droite");
@@ -190,6 +196,8 @@ setInterval(function () {
                     move(ennemi[i], "gauche");
                 }
                 break;
+
+
             case 3:
                 if (parseInt(window.getComputedStyle(ennemi[i]).getPropertyValue("left")) === 650) {
                     move(ennemi[i], "gauche");
@@ -198,10 +206,13 @@ setInterval(function () {
                 }
                 break;
         }
+
+
         let gaucheCarre = window.getComputedStyle(carre).getPropertyValue("left");
         let hautCarre = window.getComputedStyle(carre).getPropertyValue("top");
         let gaucheEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("left");
         let hautEnnemi = window.getComputedStyle(ennemi[i]).getPropertyValue("top");
+
         if (gaucheCarre == gaucheEnnemi && hautCarre == hautEnnemi) {
             window.setTimeout(function () {
                 life--;
@@ -212,7 +223,7 @@ setInterval(function () {
     }
 }, 300);
 
-// faire bouger l'ennemi dans une direction aléatoirement
+/********* CRÉER UNE BOMBE ***********/
 
 let cadre = document.querySelector(".cadre");
 
@@ -225,7 +236,7 @@ function creerBombe() {
         bombe.style.left = window.getComputedStyle(carre).getPropertyValue("left");
         window.setTimeout(function () {
             bombe.classList.add("explosion");
-            // bombe.innerText = "BOOM!!";
+            
         }, 3000);
         window.setTimeout(function () {
             bombe.classList.remove("explosion");
@@ -244,7 +255,7 @@ window.addEventListener("keydown", function (e) {
     }
 });
 
-
+/*********** LES COLLISIONS DES BOMBES ************/
 
 function collision(bombe, perso) {
     let gaucheBombe = parseInt(window.getComputedStyle(bombe).getPropertyValue("left"));
@@ -269,12 +280,13 @@ window.setInterval(function () {
     }
 }, 100);
 
+
+/************ PERTE DE VIES & MORT ************/
+
 let life = 5;
 let vie = document.querySelector(".vie")
-
-
 let kill_interval = window.setInterval(function () {
-    let bombes = document.querySelectorAll(".bombe");
+let bombes = document.querySelectorAll(".bombe");
 
     if (life <= 0) {
         clearInterval(kill_interval);
@@ -308,6 +320,8 @@ let kill_interval = window.setInterval(function () {
     }
 }, 125);
 
+/************** COMPTEUR DE VIE ********************/
+
 let decompteVies = window.setInterval(function () {
     switch (life) {
         case 4:
@@ -327,7 +341,12 @@ let decompteVies = window.setInterval(function () {
             break;
     }
 })
-let leftBody = 0
+
+/***************** POSITION WALLPAPER *****************/
+
+
+
+/* let leftBody = 0
 let scrollBackground = window.setInterval(function () {
 
     document.querySelector('body').style.backgroundPositionX = (leftBody + 'px')
@@ -336,37 +355,9 @@ let scrollBackground = window.setInterval(function () {
 
 document.querySelector('#replay').addEventListener('hover', function () {
     document.querySelector('#flash').style.backgroundColor = 'white';
-})
+})$ */
 
 
 
 
 /*************** code pour son ************************/
-
-let Sound = function(src) {
-    let sound = document.createElement("audio");
-    sound.src = src;
-    sound.setAttribute("preload", "auto");
-    sound.setAttribute("controls", "none");
-    sound.style.display = "none";
-    document.body.appendChild(sound);
-    this.play = function() {
-    sound.pause();
-    sound.currentTime = 0;
-    sound.play();
-    console.log(src + " is playing");
-    };
-    this.stop = function() {
-    sound.stop();
-    };
-    };
-    let aList = ['../ProjetBomber/son/',"../ProjetBomber/son/"];
-    let onChangeSound = new Sound(aList[Math.floor(Math.random() * 1)]);
-    document.addEventListener("DOMContentLoaded", function() {
-    document.addEventListener("keydown", function() {
-    onChangeSound.play();
-    });
-    document.getElementById("btn").addEventListener("click", function() {
-    onChangeSound.play();
-    });
-    });
