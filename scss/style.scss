@@ -3,7 +3,7 @@
 @import 'mixin';
 
 body{
-  background-image: url(../img/wallpaper4.png);
+  background-image: url(../img/wallpaper.png);
   // border: 2px solid red;
   // height: 100vh;
   // transition: background-position 80s;
@@ -11,8 +11,8 @@ body{
 section{
   // height: 90%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  // align-items: center;
   max-width: 1200px;
   align-items: flex-start;
   // border: 2px sloid yellow;
@@ -24,7 +24,7 @@ section{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10%;
+  // margin-top: 10%;
 }
 
 #compteurVies{
@@ -67,7 +67,7 @@ section{
     position: relative;
     transition : background-color .1s ease-in-out;
     box-shadow: 17px 13px 15px 4px rgba(0,0,0,0.8);
-    margin-top: 10%;
+    // margin-top: 10%;
   }
   
   #carre{
@@ -117,8 +117,44 @@ section{
     //   width: 150px;
     //   height: 150px;
       background-image: url("../img/explosion.gif");
+      animation: animate 2s linear forwards
     //   transform: translate(-50px, -50px);
-     transform: scale(3);
+    //  transform: scale(3);
+  }
+  @keyframes animate{
+    0%{
+      transform: scale(0);
+    }
+    10%{
+      transform: scale(2);
+    }
+    20%{
+      transform: scale(0);
+    }
+    30%{
+      transform: scale(2);
+    }
+    40%{
+      transform: scale(0);
+    }
+    50%{
+      transform: scale(2);
+    }
+    60%{
+      transform: scale(0);
+    }
+    70%{
+      transform: scale(2);
+    }
+    80%{
+      transform: scale(0);
+    }
+    90%{
+      transform: scale(2);
+    }
+    100%{
+      transform: scale(1);
+    }
   }
 
   #got-screen{
@@ -235,8 +271,8 @@ section{
   background-color: deeppink;
   display:inline-block;
   padding:8px;
-  // margin-left: 840px;
-  // margin-right: 840px;
+  margin-left: 840px;
+  margin-right: 840px;
   margin-top: 20px;
   border:1px solid #000;
   box-shadow : 0px 3px 3px 0px #D1D1D1;
