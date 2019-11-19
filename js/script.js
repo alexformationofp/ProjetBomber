@@ -316,6 +316,7 @@ document.querySelector("#replay").addEventListener("hover", function() {
 
 /*************** code pour son ************************/
 
+/*
 let Sound = function(src) {
     let sound = document.createElement("audio");
     sound.src = src;
